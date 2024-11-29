@@ -1,0 +1,49 @@
+<div class="container mx-auto px-4 py-8">
+  <div class="flex flex-col md:flex-row">
+    <!-- Imágenes -->
+    <div class="md:w-1/2 mb-6 md:mr-10">
+      <% if @product.images.attached? %>
+        <%= image_tag @product.images.first, class: "w-full rounded-lg" %>
+      <% else %>
+        <%= image_tag "placeholder.jpg", class: "w-full rounded-lg" %>
+      <% end %>
+    </div>
+
+    <!-- Detalles del producto -->
+    <div class="md:w-1/2">
+      <h1 class="text-3xl font-bold mb-4"><%= @product.name %></h1>
+      <p class="text-gray-600 mb-4"><%= @product.description %></p>
+
+      <div class="mb-4">
+        <span class="font-bold">Precio:</span>
+        <%= number_to_currency(@product.unit_price) %>
+      </div>
+
+      <div class="mb-4">
+        <span class="font-bold">Stock:</span>
+        <span class="<%= @product.stock > 0 ? 'text-green-500' : 'text-red-500' %>">
+          <%= @product.stock %> disponibles
+        </span>
+      </div>
+
+      <div class="mb-4">
+        <span class="font-bold">Categoría:</span>
+        <%= @product.category %>
+      </div>
+
+      <% if @product.size.present? %>
+        <div class="mb-4">
+          <span class="font-bold">Talle:</span>
+          <%= @product.size %>
+        </div>
+      <% end %>
+
+      <% if @product.color.present? %>
+        <div class="mb-4">
+          <span class="font-bold">Color:</span>
+          <%= @product.color %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
