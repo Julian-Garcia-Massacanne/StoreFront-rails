@@ -4,8 +4,6 @@
     <div class="md:w-1/2 mb-6 md:mr-10">
       <% if @product.images.attached? %>
         <%= image_tag @product.images.first, class: "w-full rounded-lg" %>
-      <% else %>
-        <%= image_tag "placeholder.jpg", class: "w-full rounded-lg" %>
       <% end %>
     </div>
 

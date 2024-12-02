@@ -1,0 +1,52 @@
+<h1>Agregar Nuevo Producto</h1>
+
+<%= form_with(model: @product, local: true) do |form| %>
+  <div>
+    <%= form.label :name, "Nombre del Producto" %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div>
+    <%= form.label :description, "Descripción" %>
+    <%= form.text_area :description %>
+  </div>
+
+  <div>
+    <%= form.label :unit_price, "Precio" %>
+    <%= form.number_field :unit_price, step: 0.01 %>
+  </div>
+
+  <div>
+    <%= form.label :stock, "Stock" %>
+    <%= form.number_field :stock %>
+  </div>
+
+  <div>
+    <%= form.label :category, "Categoría" %>
+    <%= form.select :category, [
+      'Camisetas', 
+      'Pantalones', 
+      'Vestidos', 
+      'Accesorios'
+    ], prompt: "Selecciona una categoría" %>
+  </div>
+
+  <div>
+    <%= form.label :size, "Talla" %>
+    <%= form.text_field :size %>
+  </div>
+
+  <div>
+    <%= form.label :color, "Color" %>
+    <%= form.text_field :color %>
+  </div>
+
+   <div>
+    <%= form.label :images, "Imágenes" %>
+    <%= form.file_field :images, multiple: true %>
+  </div>
+
+  <%= form.submit "Crear Producto" %>
+<% end %>
+
+<%= link_to 'Volver', products_path %>
