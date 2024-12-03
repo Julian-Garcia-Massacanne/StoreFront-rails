@@ -32,10 +32,6 @@
             <span class="text-lg font-bold text-green-600">
               <%= number_to_currency(product.unit_price) %>
             </span>
-            
-            <span class="text-sm <%= product.stock > 0 ? 'text-green-500' : 'text-red-500' %>">
-              Stock: <%= product.stock %>
-            </span>
           </div>
 
           <%= link_to "Ver Detalles", product_path(product), 

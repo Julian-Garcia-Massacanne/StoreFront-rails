@@ -21,14 +21,9 @@
     <%= form.number_field :stock %>
   </div>
 
-  <div>
-    <%= form.label :category, "Categoría" %>
-    <%= form.select :category, [
-      'Camisetas', 
-      'Pantalones', 
-      'Vestidos', 
-      'Accesorios'
-    ], prompt: "Selecciona una categoría" %>
+  <div class="field">
+    <%= form.label :category %>
+    <%= form.collection_select(:category_id, Category.all, :id, :name, prompt: "Selecciona una categoría") %>
   </div>
 
   <div>

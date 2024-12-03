@@ -3,10 +3,6 @@ class ProductsController < ApplicationController
 
   def index
     @products = Product.all
-
-    # Filtros opcionales
-    @products = @products.where(category: params[:category]) if params[:category].present?
-    @products = @products.search(params[:query]) if params[:query].present?
   end
 
   def show
@@ -26,6 +22,26 @@ class ProductsController < ApplicationController
     end
   end
 
+  def edit
+    @product = Product.find(params[:id])
+    @categories = Category.all()
+  end
+
+  def update
+    @product = Product.find(params[:id])
+    if @product.update(product_params)
+      redirect_to @product, notice: "Producto actualizado correctamente."
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
+  def destroy
+    @product = Product.find(params[:id])
+    @product.destroy
+    redirect_to products_path, notice: "Se elimino el producto Correctamente"
+  end
+
 
   private
 
@@ -35,8 +51,8 @@ class ProductsController < ApplicationController
       :description,
       :unit_price,
       :stock,
-      :category,
       :size,
+      :category_id,
       :color,
       images: []
     )

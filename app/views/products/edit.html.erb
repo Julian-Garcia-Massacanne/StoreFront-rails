@@ -1,0 +1,43 @@
+<h1>Editar Producto</h1>
+
+<%= form_with(model: @product, local: true) do |form| %>
+  <% if @product.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@product.errors.count, "error") %> errores prohíben guardar este producto:</h2>
+      <ul>
+        <% @product.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name, "Nombre del Producto" %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :description, "Descripción" %>
+    <%= form.text_area :description %>
+  </div>
+
+  <div class="field">
+    <%= form.label :unit_price, "Precio Unitario" %>
+    <%= form.number_field :unit_price, step: 0.01 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :stock, "Stock" %>
+    <%= form.number_field :stock %>
+  </div>
+
+  <div class="field">
+    <%= form.label :category_id, "Categoría" %>
+    <%= form.collection_select(:category_id, @categories, :id, :name, prompt: "Selecciona una categoría") %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit "Actualizar Producto" %>
+  </div>
+<% end %>

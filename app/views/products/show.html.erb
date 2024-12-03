@@ -25,8 +25,10 @@
       </div>
 
       <div class="mb-4">
-        <span class="font-bold">Categoría:</span>
-        <%= @product.category %>
+        <p>
+          <strong>Categoría:</strong>
+          <%= @product.category.name %>
+        </p>
       </div>
 
       <% if @product.size.present? %>
@@ -47,5 +49,9 @@
           <%= link_to "Volver a Listado", products_path, class: "bg-blue-500 text-white px-4 py-2 rounded mt-4 inline-block" %>
       </div>
     </div>
+
+    <%= link_to "Editar Producto", edit_product_path(@product), class: "bg-blue-500 text-white px-4 py-2 rounded mt-4 inline-block" %>
+
+    <%= button_to "Eliminar", product_path(@product), method: :delete, data: { confirm: "¿Estás seguro de que deseas eliminar este producto?" } %>
   </div>
 </div>
