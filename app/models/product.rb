@@ -13,9 +13,4 @@ class Product < ApplicationRecord
     def soft_delete
       update(deleted_at: Time.current, stock: 0)
     end
-
-    # Scope para búsquedas
-    scope :search, ->(query) {
-      where("name ILIKE ? OR description ILIKE ?", "%#{query}%", "%#{query}%")
-    }
 end

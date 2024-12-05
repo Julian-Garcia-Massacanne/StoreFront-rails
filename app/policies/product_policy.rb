@@ -1,17 +1,28 @@
 class ProductPolicy < ApplicationPolicy
   def index?
-    admin? || manager? || employee?
+    true
+  end
+
+  def show?
+    true
   end
 
   def create?
-    admin? || manager? || employee?
+    user_authenticated? && (admin? || manager? || employee?)
   end
 
   def update?
-    admin? || manager? || employee?
+    user_authenticated? && (admin? || manager? || employee?)
   end
 
   def destroy?
-    admin? || manager? || employee?
+    user_authenticated? && (admin? || manager? || employee?)
+  end
+
+
+  private
+
+  def user_authenticated?
+    user.present?
   end
 end

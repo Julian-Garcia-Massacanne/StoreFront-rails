@@ -43,7 +43,7 @@ class ProductsController < ApplicationController
   def destroy
     @product = Product.find(params[:id])
     authorize @product
-    @product.destroy
+    @product.soft_delete
     redirect_to products_path, notice: "Se elimino el producto Correctamente"
   end
 

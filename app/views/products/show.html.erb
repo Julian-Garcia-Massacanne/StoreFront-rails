@@ -46,12 +46,16 @@
       <% end %>
 
       <div class="mb-4">
-          <%= link_to "Volver a Listado", products_path, class: "bg-blue-500 text-white px-4 py-2 rounded mt-4 inline-block" %>
+          <%= link_to "Volver a Listado", root_path, class: "bg-blue-500 text-white px-4 py-2 rounded mt-4 inline-block" %>
       </div>
     </div>
 
-    <%= link_to "Editar Producto", edit_product_path(@product), class: "bg-blue-500 text-white px-4 py-2 rounded mt-4 inline-block" %>
+    <% if policy(@product).update? %>
+      <%= link_to "Editar Producto", edit_product_path(@product), class: "bg-blue-500 text-white px-4 py-2 rounded mt-4 inline-block" %>
+    <% end %>
 
-    <%= button_to "Eliminar", product_path(@product), method: :delete, data: { confirm: "¿Estás seguro de que deseas eliminar este producto?" } %>
+    <% if policy(@product).destroy? %>
+      <%= button_to "Eliminar", product_path(@product), method: :delete, data: { confirm: "¿Estás seguro de que deseas eliminar este producto?" }, class: "bg-red-500 text-white px-4 py-2 rounded mt-4 inline-block" %>
+    <% end %>
   </div>
 </div>

@@ -23,6 +23,19 @@
   </head>
 
   <body>
+     <% unless devise_controller? %>
+      <nav class="navbar">
+        <%= link_to "AVIVAS", root_path, class: "navbar-brand" %>
+          <div class="navbar-nav">
+            <% if user_signed_in? %>
+              <%= link_to 'Agregar Producto', new_product_path, class: 'btn btn-primary' %>
+              <%= button_to "Cerrar Sesión", destroy_user_session_path, method: :delete, class: "btn btn-secondary" %>
+            <% else %>
+              <%= link_to "Iniciar Sesión", new_user_session_path, class: "btn btn-outline" %>
+            <% end %>
+          </div>
+      </nav>
+    <% end %>
     <%= yield %>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
