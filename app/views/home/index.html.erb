@@ -1,0 +1,34 @@
+<div class="container mx-auto px-4">
+
+  <h2>Este es el home</h2>
+  <!-- Listado de productos -->
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <% @products.each do |product| %>
+      <div class="p-4"> 
+      <h2 class="text-xl font-semibold mb-2"><%= product.name %></h2>
+      <div class="border rounded-lg overflow-hidden shadow-lg">
+        <% if product.images.attached? %>
+          <%= image_tag url_for(product.images.first) %>
+        <% else %>
+          <p>No hay imagen disponible</p>
+        <% end %>
+
+       
+          <div class="flex justify-between items-center">
+            <span class="text-lg font-bold text-green-600">
+              <%= number_to_currency(product.unit_price) %>
+            </span>
+          </div>
+
+          <%= link_to "Ver Detalles", product_path(product), 
+              class: "mt-4 block text-center bg-blue-500 text-white py-2 rounded hover:bg-blue-600" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <% if @products.empty? %>
+    <p class="text-center text-gray-500 mt-10">No hay productos disponibles.</p>
+  <% end %>
+</div>
+

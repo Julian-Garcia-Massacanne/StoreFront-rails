@@ -12,7 +12,7 @@ Rails.application.routes.draw do
 
 
   # Ruta default
-  root to: "products#index"
+  root to: "home#index"
 
 
   resources :products, only: [ :index, :show, :new, :create, :edit, :update, :destroy ]

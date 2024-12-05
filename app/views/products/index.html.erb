@@ -1,30 +1,39 @@
 <div class="container mx-auto px-4">
 
-
-  <!-- Listado de productos -->
-  <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-    <% @products.each do |product| %>
-      <div class="p-4"> 
-      <h2 class="text-xl font-semibold mb-2"><%= product.name %></h2>
-      <div class="border rounded-lg overflow-hidden shadow-lg">
-        <% if product.images.attached? %>
-          <%= image_tag url_for(product.images.first) %>
-        <% else %>
-          <p>No hay imagen disponible</p>
+  <h2 class="text-xl font-semibold mb-4">Listado de Productos</h2>
+  
+  <!-- Tabla de productos -->
+  <div class="bg-white shadow-md rounded my-6">
+    <table class="table-auto w-full">
+      <thead>
+        <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
+          <th class="py-3 px-6 text-left">Nombre del Producto</th>
+          <th class="py-3 px-6 text-right">Acciones</th>
+        </tr>
+      </thead>
+      <tbody class="text-gray-600 text-sm font-light">
+        <% @products.each do |product| %>
+          <tr class="border-b border-gray-200 hover:bg-gray-100">
+            <!-- Nombre del producto -->
+            <td class="py-3 px-6 text-left whitespace-nowrap">
+              <span class="font-medium"><%= product.name %></span>
+            </td>
+            
+            <!-- Botones de acciones -->
+            <td class="py-3 px-6 text-right">
+              <div class="flex justify-end space-x-4">
+                <%= link_to 'Editar', edit_product_path(product), 
+                      class: "text-blue-500 hover:underline" %>
+                <%= link_to 'Eliminar', product_path(product), 
+                      method: :delete, 
+                      data: { confirm: '¿Estás seguro de eliminar este producto?' }, 
+                      class: "text-red-500 hover:underline" %>
+              </div>
+            </td>
+          </tr>
         <% end %>
-
-       
-          <div class="flex justify-between items-center">
-            <span class="text-lg font-bold text-green-600">
-              <%= number_to_currency(product.unit_price) %>
-            </span>
-          </div>
-
-          <%= link_to "Ver Detalles", product_path(product), 
-              class: "mt-4 block text-center bg-blue-500 text-white py-2 rounded hover:bg-blue-600" %>
-        </div>
-      </div>
-    <% end %>
+      </tbody>
+    </table>
   </div>
 
   <% if @products.empty? %>

@@ -2,7 +2,7 @@ class ProductsController < ApplicationController
   # skip_before_action :authenticate_user!, only: [ :index, :show ]
 
   def index
-    @products = Product.all
+    @products = Product.with_deleted
   end
 
   def show
@@ -25,13 +25,13 @@ class ProductsController < ApplicationController
   end
 
   def edit
-    @product = Product.find(params[:id])
+    @product = Product.unscoped.find(params[:id])
     authorize @product
     @categories = Category.all()
   end
 
   def update
-    @product = Product.find(params[:id])
+    @product = Product.unscoped.find(params[:id])
     authorize @product
     if @product.update(product_params)
       redirect_to @product, notice: "Producto actualizado correctamente."
@@ -41,7 +41,7 @@ class ProductsController < ApplicationController
   end
 
   def destroy
-    @product = Product.find(params[:id])
+    @product = Product.unscoped.find(params[:id])
     authorize @product
     @product.soft_delete
     redirect_to products_path, notice: "Se elimino el producto Correctamente"
