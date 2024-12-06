@@ -16,4 +16,14 @@ class Product < ApplicationRecord
     def soft_delete
       update(deleted_at: Time.current, stock: 0)
     end
+
+    #Para el filtrado, definis sobre que atributos se puede buscar o que relaciones
+    def self.ransackable_attributes(auth_object = nil)
+      %w[name category_id]
+    end
+  
+    # Si necesitas filtrar por relaciones
+    def self.ransackable_associations(auth_object = nil)
+      %w[category]
+    end
 end

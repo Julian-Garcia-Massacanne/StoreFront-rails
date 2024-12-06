@@ -1,5 +1,22 @@
 <div class="container mx-auto px-4">
 
+  <%= search_form_for @q, url: root_path, method: :get do |f| %>
+  <div>
+    <%= f.label :name_cont, "Buscar por nombre" %>
+    <%= f.text_field :name_cont, class: "form-control" %>
+  </div>
+
+  <div>
+    <%= f.label :category_id_eq, "Filtrar por categoría" %>
+    <%= f.select :category_id_eq, Category.all.collect { |c| [c.name, c.id] }, 
+                { prompt: "Seleccione una categoría" }, 
+                class: "form-control" %>
+  </div>
+
+  <div>
+    <%= f.submit "Filtrar", class: "btn btn-primary" %>
+  </div>
+<% end %>
   <!-- Listado de productos -->
   <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
     <% @products.each do |product| %>

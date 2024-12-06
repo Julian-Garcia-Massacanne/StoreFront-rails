@@ -1,6 +1,7 @@
 class HomeController < ApplicationController
   def index
-    @products = Product.all
+    @q = Product.ransack(params[:q]) # Por defecto, excluirá eliminados
+    @products = @q.result.includes(:category)
   end
 
   def show
