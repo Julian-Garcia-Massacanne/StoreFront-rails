@@ -12,4 +12,9 @@ class ApplicationController < ActionController::Base
     flash[:alert] = "No tienes permisos para realizar esta acción."
     redirect_to(request.referrer || root_path)
   end
+
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:role])
+    devise_parameter_sanitizer.permit(:account_update, keys: [:role])
+  end
 end

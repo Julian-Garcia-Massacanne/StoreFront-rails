@@ -1,0 +1,50 @@
+<h1>Crear Usuario</h1>
+
+<%= form_with model: @user, url: '/user_register',method: :post, local: true do |form| %>
+  <% if @user.errors.any? %>
+    <div class="errors">
+      <h2><%= pluralize(@user.errors.count, "error") %> encontrado(s):</h2>
+      <ul>
+        <% @user.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :username, "Nombre de usuario" %>
+    <%= form.text_field :username, required: true %>
+  </div>
+
+  <div class="field">
+    <%= form.label :email, "Correo Electrónico" %>
+    <%= form.email_field :email, required: true %>
+  </div>
+
+  <div class="field">
+    <%= form.label :phone, "Telefono" %>
+    <%= form.text_field :phone, required: true %>
+  </div>
+
+
+  <div class="field">
+    <%= form.label :role, "Rol" %>
+    <% roles = current_user.admin? ? User.roles.keys : User.roles.except("admin").keys %>
+    <%= form.select :role, roles.map { |role| [role.humanize, role] }, required: true %>
+  </div>
+
+  <div class="field">
+    <%= form.label :password, "Contraseña" %>
+    <%= form.password_field :password, required: true %>
+  </div>
+
+  <div class="field">
+    <%= form.label :password_confirmation, "Confirmar Contraseña" %>
+    <%= form.password_field :password_confirmation, required: true %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit "Crear Usuario", class: "btn btn-primary" %>
+  </div>
+<% end %>

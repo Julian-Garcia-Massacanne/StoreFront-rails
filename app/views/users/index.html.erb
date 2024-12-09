@@ -1,18 +1,28 @@
 <h1>Lista de Usuarios</h1>
 
+<% if policy(User).new? %>
+  <%= link_to "Crear Usuario", new_user_path, class: "btn btn-success" %>
+<% end %>
+
 <table>
   <thead>
     <tr>
+      <th>Nombre de usuario</th>
       <th>Email</th>
+      <th>Estado</th>
       <th>Acciones</th>
     </tr>
   </thead>
   <tbody>
     <% @users.each do |user| %>
       <tr>
+        <td><%= user.username %></td>
         <td><%= user.email %></td>
+        <td><%= user.blocked ? "Desactivado" : "Activo" %></td>
         <td>
-          <%= link_to 'Ver', class: 'btn btn-sm btn-info' %>
+        <% if !user.blocked && current_user.admin? %>
+          <%= button_to "Bloquear", user_block_path, method: :post, params: { id: user.id }, class: "btn btn-danger", data: { confirm: "¿Estás seguro de bloquear a este usuario?" } %>
+        <% end %>
         </td>
       </tr>
     <% end %>
