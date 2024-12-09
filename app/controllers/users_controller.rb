@@ -1,4 +1,7 @@
 class UsersController < ApplicationController
+
+  before_action :set_user, only: [:edit, :update]
+
   def index
     @users = User.all
     authorize @users
@@ -29,11 +32,30 @@ class UsersController < ApplicationController
     end
   end
 
+  def edit
+  end
+
+  def update
+    if @user.update!(user_params_edit)
+      redirect_to root_path, notice: "Tu perfil ha sido actualizado con éxito."
+    else
+      render :edit
+    end
+  end
+
 
   private 
 
   def user_params
     params.require(:user).permit(:username, :email, :phone, :password, :password_confirmation, :role)
+  end
+
+  def set_user
+    @user = current_user 
+  end
+
+  def user_params_edit
+    params.require(:user).permit(:username, :email, :password, :password_confirmation)
   end
 
 end

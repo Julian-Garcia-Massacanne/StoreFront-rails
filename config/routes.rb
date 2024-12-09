@@ -23,4 +23,7 @@ Rails.application.routes.draw do
 
   post '/user_register', to: 'users#create'
   post '/user_block', to: 'users#block'
+
+  get '/profile', to: 'users#edit', as: :edit_profile
+  patch '/profile', to: 'users#update'
 end
