@@ -13,7 +13,7 @@
     <select id="product-select">
       <option value="">Seleccione un producto</option>
       <% @products.each do |product| %>
-        <option value="<%= product.id %>" data-unit-price="<%= product.unit_price %>">
+        <option value="<%= product.id %>" data-unit-price="<%= product.unit_price %>" data-stock="<%= product.stock %>">
           <%= product.name %>
         </option>
       <% end %>
@@ -65,21 +65,36 @@
 
     addToSaleButton.addEventListener("click", () => {
       const selectedOption = productSelect.selectedOptions[0];
+      const quantity = parseInt(productQuantity.value);
       if (!selectedOption || !productQuantity.value) {
         alert("Seleccione un producto y una cantidad válida.");
         return;
       }
 
+       if (!selectedOption || selectedOption.value == "") {
+        alert("Debe seleccionar un producto.");
+      return;
+      }
 
+      if (!quantity || quantity <= 0) {
+        alert("Debe ingresar una cantidad válida.");
+        return;
+      }
 
+      const stock = parseInt(selectedOption.getAttribute("data-stock"));
+      if (quantity > stock) {
+        alert(`La cantidad ingresada excede el stock disponible (${stock}).`);
+      return;
+      }
+
+      
       const productId = selectedOption.value;
       const productName = selectedOption.textContent;
       const unitPrice = parseFloat(selectedOption.getAttribute("data-unit-price"));
-      const quantity = parseInt(productQuantity.value);
       const subtotal = unitPrice * quantity;
 
       
-
+     
       
 
       // Crear fila en la tabla
