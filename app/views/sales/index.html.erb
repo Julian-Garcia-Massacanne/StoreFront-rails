@@ -1,5 +1,9 @@
 <h1>Listado de Ventas</h1>
 
+<% if policy(Sale).new? %>
+  <%= link_to 'Nueva Venta', new_sale_path, class: 'btn btn-primary' %>
+<% end %>
+
 <table>
   <thead>
     <tr>
@@ -23,7 +27,7 @@
         <td>$<%= number_to_currency(sale.total, unit: '', separator: '.', delimiter: ',') %></td>
         <td><%= sale.state.capitalize %></td>
         <td>
-          <%= link_to 'Ver', '#', class: 'btn btn-info' %>
+          <%= link_to 'Ver', sale_path(sale), class: 'btn btn-primary' %>
         </td>
         <td>
           <% if sale.active? %>
@@ -42,4 +46,3 @@
  
 </table>
 
-<%= link_to 'Nueva Venta', new_sale_path, class: 'btn btn-primary' %>

@@ -7,11 +7,8 @@ class Product < ApplicationRecord
 
     has_many_attached :images
 
-    # Para el borrado lógico
-    default_scope { where(deleted_at: nil) }
-
-    #Para obtener los borrados
-    scope :with_deleted, -> { unscope(where: :deleted_at) }
+    # productos que se ven para vender
+    scope :to_sale, -> { where(deleted_at: nil).where('stock > 0') }
 
     # Método para borrado lógico
     def soft_delete

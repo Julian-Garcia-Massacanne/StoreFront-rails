@@ -27,5 +27,4 @@ class UserPolicy < ApplicationPolicy
     user.present?
   end
 
-
 end

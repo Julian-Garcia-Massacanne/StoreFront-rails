@@ -1,0 +1,29 @@
+<h1>Detalles de la Venta</h1>
+
+<p><strong>Estado:</strong> <%= @sale.state %></p>
+<p><strong>Cliente:</strong> <%= @client.name %> <%= @client.lastname %></p>
+<p><strong>Fecha:</strong> <%= @sale.created_at.strftime("%d/%m/%Y %H:%M") %></p>
+
+<h2>Productos en la Venta</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Producto</th>
+      <th>Cantidad</th>
+      <th>Precio Unitario</th>
+      <th>Subtotal</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @items.each do |item| %>
+      <tr>
+        <td><%= item.product.name %></td>
+        <td><%= item.cant %></td>
+        <td><%= number_to_currency(item.unit_price) %></td>
+        <td><%= number_to_currency(item.cant * item.unit_price) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<p><strong>Total:</strong> <%= @sale.total %></p>

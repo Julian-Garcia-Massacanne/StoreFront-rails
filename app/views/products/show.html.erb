@@ -46,12 +46,12 @@
       <% end %>
 
       <div class="mb-4">
-          <%= link_to "Volver a Listado", root_path, class: "bg-blue-500 text-white px-4 py-2 rounded mt-4 inline-block" %>
+          <%= link_to "Volver a Listado", root_path, class: "btn btn-primary" %>
       </div>
     </div>
 
     <% if policy(@product).update? %>
-      <%= link_to "Editar Producto", edit_product_path(@product), class: "bg-blue-500 text-white px-4 py-2 rounded mt-4 inline-block" %>
+      <%= link_to "Editar Producto", edit_product_path(@product), class: "btn btn-primary" %>
     <% end %>
 
     <% if policy(@product).destroy? %>

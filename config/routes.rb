@@ -28,7 +28,7 @@ Rails.application.routes.draw do
   patch '/profile', to: 'users#update'
 
 
-  resources :sales , only: [:index, :new, :create]
+  resources :sales , only: [:index,:show ,:new, :create]
 
   patch '/sales/:id/cancel', to: 'sales#cancel', as: 'cancel_sale'
 

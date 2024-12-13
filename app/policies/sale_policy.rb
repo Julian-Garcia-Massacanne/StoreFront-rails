@@ -3,7 +3,15 @@ class SalePolicy < ApplicationPolicy
     user_authenticated? && (admin? || manager? || employee?)
   end
 
+  def show?
+    user_authenticated? && (admin? || manager? || employee?)
+  end
+  
   def create?
+    user_authenticated? && (admin? || manager? || employee?)
+  end
+
+  def cancel?
     user_authenticated? && (admin? || manager? || employee?)
   end
 

@@ -1,5 +1,5 @@
 class SalesController < ApplicationController
-  # before_action :authenticate_user!, only: [ :index, :new, :create, :cancel ]
+  before_action :authenticate_user!, only: [ :index,:show, :new, :create, :cancel ]
 
 
   def index
@@ -11,8 +11,14 @@ class SalesController < ApplicationController
       @sale = Sale.new
       @sale.sale_items.build
       @clients = Client.all
-      @products = Product.all
+      @products = Product.to_sale
       authorize @sale
+    end
+
+    def show
+      @sale = Sale.find(params[:id])
+      @client = @sale.client
+      @items = @sale.sale_items.includes(:product) 
     end
   
     def create

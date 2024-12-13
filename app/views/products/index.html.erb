@@ -3,7 +3,7 @@
   <h2 class="text-xl font-semibold mb-4">Listado de Productos</h2>
   
 
-  <%= link_to "Agregar Producto", new_product_path, class: "btn btn-success" %>
+  <%= link_to "Agregar Producto", new_product_path, class: "btn btn-primary" %>
 
   <!-- Tabla de productos -->
   <div class="bg-white shadow-md rounded my-6">
@@ -26,11 +26,11 @@
             <td class="py-3 px-6 text-right">
               <div class="flex justify-end space-x-4">
                 <%= link_to 'Editar', edit_product_path(product), 
-                      class: "text-blue-500 hover:underline" %>
+                      class: "btn btn-primary" %>
                 <%= link_to 'Eliminar', product_path(product), 
                       method: :delete, 
                       data: { confirm: '¿Estás seguro de eliminar este producto?' }, 
-                      class: "text-red-500 hover:underline" %>
+                      class: "btn btn-primary" %>
               </div>
             </td>
           </tr>
