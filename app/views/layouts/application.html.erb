@@ -20,6 +20,7 @@
     <%# Includes all stylesheet files in app/assets/stylesheets %>
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+
   </head>
 
   <body>
@@ -29,10 +30,10 @@
           <div class="navbar-nav">
             <% if user_signed_in? %>
               <%= link_to 'Productos', products_path, class: 'btn btn-primary' %>
-              <%= link_to 'Ventas', class: 'btn btn-primary' %>
+              <%= link_to 'Ventas', sales_path,class: 'btn btn-primary' %>
              <% if policy(User).index? %>
                 <%= link_to "Usuarios", users_path, class: "btn btn-primary" %>
-              <%= link_to 'Mi perfil', edit_profile_path, class: "btn btn-light" %>
+              <%= link_to 'Mi perfil', edit_profile_path, class: "btn btn-primary" %>
             <% end %>
               <%= button_to "Cerrar Sesión", destroy_user_session_path, method: :delete, class: "btn btn-secondary" %>
             <% else %>

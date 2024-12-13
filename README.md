@@ -1,24 +1,31 @@
-# README
+# Mi Proyecto Rails
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+**Descripción:**
 
-Things you may want to cover:
+Este proyecto es una aplicación web Rails. Es una aplicacion web que simula localmente una pagina de Venta de Ropa llamada "Avivas".
 
-* Ruby version
+**Tecnologías:**
 
-* System dependencies
+* **Rails:** 8.0.0
+* **Ruby:** 3.3.6
+* **Base de datos:** sqlite3
+* **Otros:** Se utilizaron gemas adicionales como por EJ: Ransack : La misma fue utilizada para los filtros
+                                                          Pundit : La cual fue utilizada para crear y manejar los permisos dentro de la pagina
+                                                          Devise : La cual se utilizo para el manejo de sesiones (log in)
+                                                          
 
-* Configuration
+**Requisitos:**
 
-* Database creation
+* **Sistema operativo:** [Linux, macOS, Windows]
+* **Gestor de paquetes:** [rbenv, RVM]
 
-* Database initialization
+**Instalación:**
 
-* How to run the test suite
+1. **Clonar el repositorio:**
+   ```bash
+   git clone git@github.com:Julian-Garcia-Massacanne/StoreFront-rails.git
 
-* Services (job queues, cache servers, search engines, etc.)
+2. **Navegar hasta el proyecto e instalar dependencias:**
+    cd StoreFront
+    bundle install
 
-* Deployment instructions
-
-* ...

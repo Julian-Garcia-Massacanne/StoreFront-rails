@@ -1,0 +1,40 @@
+<h1>Listado de Ventas</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Fecha y Hora</th>
+      <th>Cliente</th>
+      <th>Empleado</th>
+      <th>Total</th>
+      <th>Estado</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @sales.each do |sale| %>
+      <tr>
+        <td><%= sale.id %></td>
+        <td><%= sale.date.strftime('%d/%m/%Y %H:%M') %></td>
+        <td><%= sale.client.name %> <%= sale.client.lastname %></td>
+        <td><%= sale.user.username %></td>
+        <td>$<%= number_to_currency(sale.total, unit: '', separator: '.', delimiter: ',') %></td>
+        <td><%= sale.state.capitalize %></td>
+        <td>
+          <%= link_to 'Ver', '#', class: 'btn btn-info' %>
+          <%= link_to 'Cancelar', '#', method: :patch, data: { confirm: '¿Estás seguro de cancelar esta venta?' }, class: 'btn btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+
+    <% if @sales.empty? %>
+        <p class="text-center text-gray-500 mt-10">No hay ventas disponibles.</p>
+     <% end %>
+    
+  </tbody>
+
+ 
+</table>
+
+<%= link_to 'Nueva Venta', new_sale_path, class: 'btn btn-primary' %>

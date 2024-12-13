@@ -26,4 +26,12 @@ Rails.application.routes.draw do
 
   get '/profile', to: 'users#edit', as: :edit_profile
   patch '/profile', to: 'users#update'
+
+
+  resources :sales , only: [:index, :new, :create]
+
+  post 'add_product', to: 'sales#add_product', as: 'add_product'
+
+  post 'clear_cart', to: 'sales#clear_cart', as: 'clear_cart'
+
 end

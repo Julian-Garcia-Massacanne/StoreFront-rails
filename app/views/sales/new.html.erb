@@ -1,0 +1,118 @@
+<%= form_with model: @sale, url: sales_path do |f| %>
+  <h2>Registrar venta</h2>
+
+  <h3>Datos del cliente</h3>
+  <div>
+    <%= f.label :client_id, "Cliente" %>
+    <%= f.collection_select :client_id, @clients, :id, :dni, prompt: "Seleccione dni del Cliente" %>
+  </div>
+
+  <h3>Agregar Producto</h3>
+  <div>
+    <label for="product-select">Producto</label>
+    <select id="product-select">
+      <option value="">Seleccione un producto</option>
+      <% @products.each do |product| %>
+        <option value="<%= product.id %>" data-unit-price="<%= product.unit_price %>">
+          <%= product.name %>
+        </option>
+      <% end %>
+    </select>
+  </div>
+  <div>
+    <label for="product-quantity">Cantidad</label>
+    <input type="number" id="product-quantity" value=1 min=1>
+  </div>
+  <div>
+    <button type="button" id="add-to-sale">Agregar a la venta</button>
+  </div>
+
+  <h3>Productos Seleccionados</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Producto</th>
+        <th>Cantidad</th>
+        <th>Precio Unitario</th>
+        <th>Subtotal</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody id="sale-items">
+    </tbody>
+  </table>
+
+  <h3>Total: <span id="total">0.00</span></h3>
+
+  <div>
+    <%= f.submit "Registrar venta" %>
+  </div>
+<% end %>
+
+<script>
+  document.addEventListener("turbo:load", () => {
+    const productSelect = document.getElementById("product-select");
+    const productQuantity = document.getElementById("product-quantity");
+    const addToSaleButton = document.getElementById("add-to-sale");
+    const saleItemsContainer = document.getElementById("sale-items");
+    const totalDisplay = document.getElementById("total");
+    let total = 0;
+
+    const updateTotal = (amount) => {
+      total += amount;
+      totalDisplay.textContent = total.toFixed(2);
+    };
+
+    addToSaleButton.addEventListener("click", () => {
+      const selectedOption = productSelect.selectedOptions[0];
+      if (!selectedOption || !productQuantity.value) {
+        alert("Seleccione un producto y una cantidad válida.");
+        return;
+      }
+
+
+
+      const productId = selectedOption.value;
+      const productName = selectedOption.textContent;
+      const unitPrice = parseFloat(selectedOption.getAttribute("data-unit-price"));
+      const quantity = parseInt(productQuantity.value);
+      const subtotal = unitPrice * quantity;
+
+      
+
+      
+
+      // Crear fila en la tabla
+      const row = document.createElement("tr");
+      row.innerHTML = `
+        <td>${productName}</td>
+        <td>${quantity}</td>
+        <td>${unitPrice.toFixed(2)}</td>
+        <td class="subtotal">${subtotal.toFixed(2)}</td>
+        <td>
+          <button type="button" class="remove-item">Eliminar</button>
+        </td>
+        <input type="hidden" name="sale[sale_items_attributes][][product_id]" value="${productId}">
+        <input type="hidden" name="sale[sale_items_attributes][][cant]" value="${quantity}">
+        <input type="hidden" name="sale[sale_items_attributes][][unit_price]" value="${unitPrice}">
+      `;
+      saleItemsContainer.appendChild(row);
+
+      // Actualizar total
+      updateTotal(subtotal);
+
+      // Limpiar los inputs
+      productSelect.value = "";
+      productQuantity.value = "1";
+    });
+
+    saleItemsContainer.addEventListener("click", (e) => {
+      if (e.target.classList.contains("remove-item")) {
+        const row = e.target.closest("tr");
+        const subtotal = parseFloat(row.querySelector(".subtotal").textContent);
+        updateTotal(-subtotal);
+        row.remove();
+      }
+    });
+  });
+</script>
