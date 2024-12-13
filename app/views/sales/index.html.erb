@@ -9,7 +9,8 @@
       <th>Empleado</th>
       <th>Total</th>
       <th>Estado</th>
-      <th>Acciones</th>
+      <th>Ver</th>
+      <th>Cancelar</th>
     </tr>
   </thead>
   <tbody>
@@ -23,7 +24,11 @@
         <td><%= sale.state.capitalize %></td>
         <td>
           <%= link_to 'Ver', '#', class: 'btn btn-info' %>
-          <%= link_to 'Cancelar', '#', method: :patch, data: { confirm: '¿Estás seguro de cancelar esta venta?' }, class: 'btn btn-danger' %>
+        </td>
+        <td>
+          <% if sale.active? %>
+            <%= button_to "Cancelar", cancel_sale_path(sale.id), method: :patch, data: { confirm: "¿Está seguro de cancelar esta venta?" }, class: "btn btn-danger" %>
+          <% end %>
         </td>
       </tr>
     <% end %>

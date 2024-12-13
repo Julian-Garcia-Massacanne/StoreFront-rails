@@ -42,6 +42,18 @@ class SalesController < ApplicationController
         end
       end
     end
+
+
+    def cancel
+      @sale = Sale.find(params[:id])
+
+      if @sale.active?
+        @sale.cancel!
+        redirect_to sales_path, notice: "La venta fue cancelada exitosamente y el stock ha sido restaurado."
+      else
+        redirect_to sales_path, alert: "La venta ya estaba cancelada."
+      end
+    end
   
     private
   

@@ -30,8 +30,6 @@ Rails.application.routes.draw do
 
   resources :sales , only: [:index, :new, :create]
 
-  post 'add_product', to: 'sales#add_product', as: 'add_product'
-
-  post 'clear_cart', to: 'sales#clear_cart', as: 'clear_cart'
+  patch '/sales/:id/cancel', to: 'sales#cancel', as: 'cancel_sale'
 
 end
