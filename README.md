@@ -61,14 +61,14 @@ La aplicación contempla tres roles de usuario:
    git clone git@github.com:Julian-Garcia-Massacanne/StoreFront-rails.git
 
 2. **Navegar hasta el proyecto e instalar dependencias:**
-    cd StoreFront
-    bundle install
+    - cd StoreFront
+    - bundle install
 
 3. **Iniciar y cargar la base de datos**
    
-   rails db:create
-   rails db:migrate
-   rails db:seed
+- rails db:create
+- rails db:migrate
+-  rails db:seed
 
 4. **Correr el servicio**
 
