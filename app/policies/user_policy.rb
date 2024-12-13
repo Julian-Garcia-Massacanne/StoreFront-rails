@@ -1,24 +1,30 @@
 class UserPolicy < ApplicationPolicy
   def index?
-    admin? || manager?
+    user_authenticated? && (admin? || manager?)
   end
 
   def new?
-    admin? || manager?
+    user_authenticated? && (admin? || manager?)
   end
 
   def create?
-    admin? || (manager? && record.role != "admin")
+    user_authenticated? &&  (admin? || (manager? && record.role != "admin"))
   end
 
   def update?
-    admin? ||
+    user_authenticated? &&  (admin? ||
     (manager? && record.role != "admin") ||
-    own_account?(record)
+    own_account?(record))
   end
 
   def destroy?
-    admin? || (manager? && record.role != "admin")
+    user_authenticated? &&  (admin? || (manager? && record.role != "admin"))
+  end
+
+  private
+
+  def user_authenticated?
+    user.present?
   end
 
 

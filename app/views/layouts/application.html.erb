@@ -29,8 +29,12 @@
         <%= link_to "AVIVAS", root_path, class: "navbar-brand" %>
           <div class="navbar-nav">
             <% if user_signed_in? %>
-              <%= link_to 'Productos', products_path, class: 'btn btn-primary' %>
-              <%= link_to 'Ventas', sales_path,class: 'btn btn-primary' %>
+              <% if policy(Product).index? %>
+                <%= link_to 'Productos', products_path, class: 'btn btn-primary' %>
+              <% end %>
+              <% if policy(Sale).index? %>
+                <%= link_to 'Ventas', sales_path,class: 'btn btn-primary' %>
+              <% end %>
              <% if policy(User).index? %>
                 <%= link_to "Usuarios", users_path, class: "btn btn-primary" %>
               <%= link_to 'Mi perfil', edit_profile_path, class: "btn btn-primary" %>

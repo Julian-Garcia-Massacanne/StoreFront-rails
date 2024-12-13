@@ -1,7 +1,10 @@
 class SalesController < ApplicationController
+  # before_action :authenticate_user!, only: [ :index, :new, :create, :cancel ]
+
 
   def index
     @sales = Sale.includes(:client, :user)
+    authorize @sales
   end
 
     def new
@@ -9,10 +12,12 @@ class SalesController < ApplicationController
       @sale.sale_items.build
       @clients = Client.all
       @products = Product.all
+      authorize @sale
     end
   
     def create
       @sale = Sale.new(sale_params)
+      authorize @sale
       @sale.date = Time.current
       @sale.user = current_user
       @sale.state = "activa"
@@ -46,6 +51,8 @@ class SalesController < ApplicationController
 
     def cancel
       @sale = Sale.find(params[:id])
+
+      authorize @sale
 
       if @sale.active?
         @sale.cancel!
