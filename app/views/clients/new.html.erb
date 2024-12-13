@@ -1,0 +1,27 @@
+<h2>Crear Cliente</h2>
+
+<%= form_with model: @client, local: true do |f| %>
+  <div>
+    <%= f.label :name, "Nombre" %>
+    <%= f.text_field :name, required: true %>
+  </div>
+
+  <div>
+    <%= f.label :lastname, "Apellido" %>
+    <%= f.text_field :lastname, required: true %>
+  </div>
+
+  <div>
+    <%= f.label :dni, "DNI" %>
+    <%= f.text_field :dni, required: true %>
+  </div>
+
+  <div>
+    <%= f.label :phone, "Teléfono" %>
+    <%= f.telephone_field :phone, required: true %>
+  </div>
+
+  <div>
+    <%= f.submit "Crear Cliente", class: "btn btn-primary" %>
+  </div>
+<% end %>

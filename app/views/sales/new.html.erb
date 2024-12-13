@@ -1,6 +1,8 @@
 <%= form_with model: @sale, url: sales_path do |f| %>
   <h2>Registrar venta</h2>
 
+  <%= link_to "Nuevo Cliente", new_client_path, class: "btn btn-primary" %>
+
   <h3>Datos del cliente</h3>
   <div>
     <%= f.label :client_id, "Cliente" %>

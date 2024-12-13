@@ -32,4 +32,6 @@ Rails.application.routes.draw do
 
   patch '/sales/:id/cancel', to: 'sales#cancel', as: 'cancel_sale'
 
+  resources :clients, only: [:new, :create]
+
 end

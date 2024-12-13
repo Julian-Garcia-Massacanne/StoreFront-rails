@@ -27,7 +27,7 @@
         </td>
         <td>
           <% if sale.active? %>
-            <%= button_to "Cancelar", cancel_sale_path(sale.id), method: :patch, data: { confirm: "¿Está seguro de cancelar esta venta?" }, class: "btn btn-danger" %>
+            <%= button_to "Cancelar", cancel_sale_path(sale.id), method: :patch, data: { confirm: "¿Está seguro de cancelar esta venta?" }, class: "btn btn-primary" %>
           <% end %>
         </td>
       </tr>
